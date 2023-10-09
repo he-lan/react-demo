@@ -47,11 +47,7 @@ effectWatcher(() => {
 })
 dep.value = '目标对象发布新消息了';
 
-const effectWatcherTest = (effect: Function) => {
-  currentEffect = effect;
-  effect();
-  currentEffect = null;
-}
+
 
 
 
