@@ -1,0 +1,57 @@
+.bulle-tchat{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  &-way{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0.3rem;
+    overflow: hidden;
+    transform: translateZ(1px);
+    display: flex;
+    align-items: center;
+  }
+  &-item {
+    position: absolute;
+    left: 0;
+    height: 0.2rem;
+    line-height: 0.18rem;
+    padding-left: 0.5rem;
+    padding-right: 0.35rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .45);
+    transform: translate(100vw, 0);
+    font-size: 0.12rem;
+    border-radius: 1rem;
+    max-width: 7rem;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    border: 1px solid rgba(255,255,255, 0.3);
+    will-change: transform;
+    &-avatar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0.18rem;
+      height: 0.18rem;
+      border-radius: 1rem;
+      background-size: cover;
+      background-position: center;
+      border: 0.5px solid #fff;
+    }
+  }
+  &-item-highlight{
+    color: #FF8F02;
+    height: 0.24rem;
+    font-size: 0.14rem;
+    line-height: 0.22rem;
+    .bkat-plug-bulletchat-item-avatar{
+      width: 0.22rem;
+      height: 0.22rem;
+    }
+  }
+}

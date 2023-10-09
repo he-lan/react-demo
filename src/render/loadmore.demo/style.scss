@@ -1,0 +1,11 @@
+.load-more-demo {
+  height: 300px;
+  width: 200px;
+  overflow: auto;
+  &-item {
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid gray;
+    text-align: center;
+  }
+}
