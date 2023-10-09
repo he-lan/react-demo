@@ -12,7 +12,6 @@ export const EffectDemo = () => {
   useEffect(() => {
     console.log('Component re-render by person')
   }, [person])
-  // 
   console.log(array)
   useEffect(() => {
     console.log('Component re-render by array')
