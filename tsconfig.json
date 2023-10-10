@@ -1,29 +1,42 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "module": "CommonJS",
     "lib": [
       "dom",
-      "dom.iterable",
-      "esnext"
+      "es2015",
+      "es2016",
+      "es2017"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
+    "downlevelIteration": true,
+    "jsx": "react",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true ,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
     "experimentalDecorators": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "api/*": ["src/api/*"],
+      "frame/*": ["src/frame/*"],
+      "assets/*": ["src/assets/*"],
+      "common/*": ["src/common/*"],
+      "render/*": ["src/render/*"],
+      "services/*": ["src/services/*"],
+      "environments/*": ["src/environments/*"],
+      "types/*": ["src/types/*"],
+      "i18n/*": ["src/i18n/*"]
+    },
+    "types": [
+      "node",
+      
+    ]
   },
   "include": [
     "src"
-  ],   
-  "noImplicitAny": false,
-  "allowJs": true,
+  ],
+
 }
+

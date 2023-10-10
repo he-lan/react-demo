@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { LoadMore } from "../../frame/loadmore/loadmore";
+import React, { useState } from "react"; 
+import { LoadMore } from "frame/loadmore/loadmore";
 import './style.scss'
 
 export const LoadMoreDemo = () => {

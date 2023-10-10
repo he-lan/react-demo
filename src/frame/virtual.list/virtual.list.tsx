@@ -2,7 +2,7 @@ import React, { useState, useRef, useMemo, useCallback } from "react";
 import './style.scss';
 
 // 高度固定
-const VirtualList = ({list=[], containerHeight=800, ItemBox=<></>, itemHeight = 50, ...props }: any) => {
+export const VirtualList = ({list=[], containerHeight=800, ItemBox=<></>, itemHeight = 50}: any) => {
   const containerRef = useRef<any>();
   const [startIndex, startIndexSet] = useState(0);
 
@@ -16,9 +16,10 @@ const VirtualList = ({list=[], containerHeight=800, ItemBox=<></>, itemHeight = 
   }, [containerHeight, itemHeight])
   //当前可视区域显示的列表的结束索引
   const endIndex = useMemo(() => {
-    return startIndex + limit;
-  }, [startIndex, limit])
-  
+    return Math.min(startIndex + limit, list.length-1);
+  }, [startIndex, limit, list.length])
+
+
   const handleScroll = (e: any) => {
     if(e.target !== containerRef.current) { return; }
      const scrollTop = e.target.scrollTop;
@@ -45,29 +46,10 @@ const VirtualList = ({list=[], containerHeight=800, ItemBox=<></>, itemHeight = 
     <div className="container" ref={containerRef} style={{height: containerHeight + 'px'}} onScroll={handleScroll}>
       <div className="list-box" style={{height: wrapHeight + 'px', transform: `translate3d(0,${containerRef.current?.scrollTop || 0}px, 0)`}}>
         { renderList() }
-        {/* {
-          list.slice(startIndex, endIndex).map((item: any, index: any) => {
-            return <div className="item-box" key={index} >{ item }</div>
-          })
-        } */}
       </div>
     </div>
   )
 }
 
-const ItemBox = ({data}: {data: any}) => {
-  return (
-    <div className="item-box">{ data }</div>
-  )
-}
-const VirtualListTest = () => {
-  const [items] = useState(Array(100).fill(1).map((_, i) => i + 1));
-  return (
-    <div className="test">
-      <VirtualList list={items} containerHeight={500} ItemBox={ ItemBox } ></VirtualList>
-    </div>
-  )
-}
 
-export default VirtualListTest;
 

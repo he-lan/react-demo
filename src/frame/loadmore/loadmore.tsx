@@ -1,4 +1,6 @@
-import { useEffect, useRef  } from "react";
+
+/* 无限加载 */
+import React, { useEffect, useRef  } from "react";
 
 interface ILoadMore {
   isLoading: boolean, 
