@@ -144,6 +144,17 @@ export const flat = (arr: any[], n: number): any[] => {
   return result;
 }
 
-
+// 柯里化函数
+export const curry = (fn: Function, ...args:any) => {
+  let length = fn.length;
+  return (...args2: any) => {
+    let newArgs = args.concat(...args2);
+    if(newArgs.length < length) {
+      return curry.call(this, fn, newArgs);
+    } else {
+      return fn.apply(this, newArgs)
+    }
+  }
+}
 
 

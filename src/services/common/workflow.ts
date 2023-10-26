@@ -2,7 +2,8 @@
  * 工作流监控服务: 主要用来监控服务内部的工作状态
  */
 import { BehaviorSubject } from "rxjs";
-import { injectable } from "tsyringe";
+import { injectable } from "frame/di";
+
 
 interface IFlowState {
   code: 'init' | 'success' | 'fail' | 'running',

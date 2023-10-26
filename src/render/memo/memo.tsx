@@ -19,7 +19,7 @@ const C = (props: any) => {
     <div>C: { props.test } -- {props.test1}</div>
   )
 }
-const B = memo((props) => {
+const B = memo(() => {
   console.log('B1');
   useEffect(() => {
     console.log('B2');
