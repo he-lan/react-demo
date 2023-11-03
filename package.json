@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.0.6",
     "customize-cra": "^1.0.0",
     "dexie": "^3.2.4",
+    "faker": "^5.5.3",
     "lz-string": "^1.5.0",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
