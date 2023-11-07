@@ -1,14 +1,16 @@
 import { BehaviorSubject } from "rxjs";
 import { singleton } from "tsyringe";
 
-const HEART_CHECK_TIME = 15 * 1000; //心跳检测的默认时间
-const HEART_CHECK_DATA = { ping:  'ALIVE' }; // 心跳检测的默认参数，跟后端协商的
-const CLOSE_ABNORMAL = 1006; // websocket 非正常关闭
+const HEART_CHECK_TIME = 15 * 1000;           // 心跳检测的默认时间
+const HEART_CHECK_DATA = { ping:  'ALIVE' };  // 心跳检测的默认参数，跟后端协商的
+const CLOSE_ABNORMAL = 1006;                  // websocket 非正常关闭
+const MAX_RECONNECT_TIMES= 100;              // 最大重连次数
 
 @singleton()
 export class WebsocketService {
   private url: string;
   private websocket: any;
+  private reconnectTimes = 0; //重连次数
   private isReconnectionLoading = false; //是否正在重连中;
   private timeId: any = null; // 延时重连ID
   private errorStack:any = []; //错误消息队列
@@ -22,7 +24,7 @@ export class WebsocketService {
   create() {
     this.websocket = new WebSocket(this.url);
     this.websocket.onopen = () => {
-
+      this.reconnectTimes = 1;
       this.heartCheck();
       //发送重连之前所发送的失败的消息
       this.errorStack.forEach((message: any) => {
@@ -43,6 +45,7 @@ export class WebsocketService {
       this.clearHeartCheck();
       e.code === CLOSE_ABNORMAL && this.reconnection();
       this.isReconnectionLoading = false;
+      this.reconnectTimes = 0;
     }
 
     this.websocket.onmessage = (e: MessageEvent) => {
@@ -51,11 +54,12 @@ export class WebsocketService {
   }
 
   private reconnection() {
-    if(this.isReconnectionLoading) { return; }
+    if(this.isReconnectionLoading || this.reconnectTimes > MAX_RECONNECT_TIMES) { return; }
     this.isReconnectionLoading = true;
     clearTimeout(this.timeId);
     this.timeId = setTimeout(() => {
       this.create();
+      this.reconnectTimes++
     }, 3000)
   }
 
