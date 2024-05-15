@@ -58,7 +58,6 @@ export const singleton = (Class: any) => {
 // @singletonWithParam('test') || @singleton()
 // class A {}
 export const singletonWithParam = (params: any) => {
-  let ins: any = null;
   return (Class: any) => {
     let ins: any = null;
     return (...args: any[]) => {

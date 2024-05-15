@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback, useMemo, useState } from "react";
-import { binarySearchAdjacent } from "common/utils/search.func";
+import { binarySearchAdjacent } from "common/utils/search";
 import './style.scss'
 
 interface IDynamicVirtualList {

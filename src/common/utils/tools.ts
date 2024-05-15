@@ -157,4 +157,41 @@ export const curry = (fn: Function, ...args:any) => {
   }
 }
 
+// 递归实现深拷贝
+const deepCopy = (obj: any) : any => {
+  if(Array.isArray(obj)) {
+    const copyArr = [];
+    for(let i = 0; i < obj.length; i++) {
+      copyArr.push(deepCopy(obj[i]))
+    }
+    return copyArr;
+  } else if(typeof obj === 'object' && obj !== null) {
+    const copyObj: any = {};
+    for(const key in obj) {
+      if(obj.hasOwnProperty(key)) {
+        copyObj[key] = deepCopy(obj[key])
+      }
+    }
+    return copyObj;
+  } else {
+    return obj;
+  }
+}
+export const deepEqual = (obj1: Object, obj2: Object) => {
+  if(obj1 === obj2) { return true; }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if(keys1.length !== keys2.length) { return false; }
+
+  for(let key of keys1) {
+    //@ts-ignore
+    if(!deepEqual(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
 
