@@ -141,36 +141,35 @@ export const useXState = (initState: any) => {
   return [state, setXState];
 }
 
-export const useDebounce = (fn: any, ms = 30, deps = []) => {
-  let timeout = useRef<any>(null);
-  useEffect(() => {
-    if(timeout.current) { clearTimeout(timeout.current); }
-    timeout.current = setTimeout(() => {
-      fn();
-    }, ms)
-  }, deps)
-  const cancel = () => {
-    clearTimeout(timeout.current);
-    timeout.current = null;
+
+export const useDebounce = (fn: any, delay = 500) => {
+  const timer = useRef<any>(null);
+
+  return (...args: any) => {
+    if(timer.current) { clearTimeout(timer.current) }
+    timer.current = setTimeout(() => {
+      fn().apply(null, args);
+    }, delay);
   }
-  return cancel;
 }
 
-export const useThrottle = (fn: any, ms = 30, deps = []) => {
-  let timeout = useRef<any>(null);
-  useEffect(() => {
+export const useThrottle = (fn: any, delay = 500) => {
+  const timeout = useRef<any>(null);
+
+  return (...args: any) => {
     if(timeout.current) { return; }
     timeout.current = true;
     setTimeout(() => {
-      fn();
+      fn().apply(null, args)
       timeout.current = false;
-    }, ms)
-  }, deps)
-} 
+    }, delay)
+  };
+}
+
 
 const useScroll = (scrollRef: any) => {
   const [ pos, setPos ] = useState([0, 0]);
-  // 6000 30+10 = 40
+  
   useEffect(() => {
     const handleScroll = (e: any) => {
       setPos([scrollRef.current.scrollLeft, scrollRef.current.scrollRight]);
@@ -182,5 +181,3 @@ const useScroll = (scrollRef: any) => {
   }, [])
   return pos;
 }
-
-

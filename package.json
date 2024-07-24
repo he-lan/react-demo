@@ -15,6 +15,7 @@
     "faker": "^5.5.3",
     "lz-string": "^1.5.0",
     "node-sass": "^9.0.0",
+    "popmotion": "^11.0.5",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
