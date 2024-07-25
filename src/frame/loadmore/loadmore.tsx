@@ -16,23 +16,23 @@ export const LoadMore = ({isLoading, isComplete, onLoad}: ILoadMore) => {
     if(!ref.current) { return }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
+         // 进入视口
         if(entry.intersectionRatio > 0) {
-          // 进入视口
           if(isComplete || isLoading) {
             return;
           }  
           onLoad();
         }
       })
-
-      return () => {
-        observer && observer.unobserve(ref.current)
-      }
     }, {})
     observer.observe(ref.current)
     
+    return () => {
+      observer && observer.unobserve(ref.current)
+    }
     /* eslint-disable-next-line */
   }, [isComplete, isLoading])
+
   return (
     <div className="load-more" ref={ref}>
       {
